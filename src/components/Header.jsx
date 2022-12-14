@@ -31,7 +31,7 @@ class Header extends React.Component {
 
   render() {
     const { userInfo, loading } = this.state;
-    // PREENCHENDO INFORMAÇÕES DE USUÁRIO RECEBIDAS NO STATE NO HEADER
+    // PREENCHENDO INFORMAÇÕES DE USUÁRIO RECEBIDAS DO STATE NO HEADER
     const user = (
       <h2 data-testid="header-user-name">
         {' '}
