@@ -8,6 +8,7 @@ import Profile from './pages/Profile';
 import ProfileEdit from './pages/ProfileEdit';
 import NotFound from './pages/NotFound';
 
+// TROCA A ROTA DAS PÁGINAS
 class App extends React.Component {
   render() {
     return (
