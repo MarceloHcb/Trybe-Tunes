@@ -1,5 +1,8 @@
 import React from 'react';
 import Header from '../components/Header';
+import Loading from '../components/Loading';
+import searchAlbumsAPI from '../services/searchAlbumsAPI';
+import ArtisticCard from '../components/ArtisticCard';
 
 // CAMPO DE PESQUISA
 class Search extends React.Component {
@@ -9,6 +12,8 @@ class Search extends React.Component {
     this.state = ({
       searchName: '',
       buttonDisable: true,
+      loading: false,
+      artisticSearchResult: [],
     });
   }
 
@@ -29,26 +34,60 @@ class Search extends React.Component {
     }, this.validationButton);
   };
 
+  handleClick = async (e) => {
+    e.preventDefault();
+    const { searchName } = this.state;
+    console.log(e.target);
+    this.setState({
+      loading: true,
+    });
+    // REQUISIÇÃO DE ARTISTAS COM BASE NO NOME DIGITADO NA PESQUISA
+    const artisticResult = await searchAlbumsAPI(searchName);
+    this.setState({
+      loading: false,
+      artisticSearchResult: [...artisticResult],
+      error: 'Nenhum álbum foi encontrado',
+    });
+  };
+
   render() {
-    const { buttonDisable } = this.state;
+    const { buttonDisable, loading, searchName,
+      artisticSearchResult, error } = this.state;
+    const artisticSearchResultDiv = (
+      <h2>
+        Resultado de álbuns de:
+        {' '}
+        {searchName}
+        <ArtisticCard artisticSearchResult={ artisticSearchResult } />
+      </h2>
+    );
+    const form = (
+      <form>
+        <input
+          type="text"
+          data-testid="search-artist-input"
+          onChange={ this.handleChange }
+        />
+        <button
+          type="submit"
+          disabled={ buttonDisable }
+          onClick={ this.handleClick }
+          data-testid="search-artist-button"
+        >
+          Pesquisar
+
+        </button>
+      </form>);
     return (
       <div data-testid="page-search">
         <Header />
-        <form>
-          <input
-            type="text"
-            data-testid="search-artist-input"
-            onChange={ this.handleChange }
-          />
-          <button
-            type="submit"
-            disabled={ buttonDisable }
-            data-testid="search-artist-button"
-          >
-            Pesquisar
+        { loading ? <Loading />
+          : form}
+        <div>
+          { artisticSearchResult.length > 0
+            ? artisticSearchResultDiv : error }
 
-          </button>
-        </form>
+        </div>
       </div>
     );
   }

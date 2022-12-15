@@ -31,6 +31,7 @@ class Login extends React.Component {
     console.log(prevState);
   }
 
+  // VALIDACAO PARA HABILITAR O BOTAO
   validationButton = () => {
     const { name } = this.state;
     const maxCaracteres = 3;
