@@ -22,14 +22,14 @@ class ArtisticCard extends React.Component {
                 data-testid={ `link-to-album-${collectionId}` }
               >
 
+                <p>{collectionName}</p>
                 <img src={ artworkUrl100 } alt={ artistName } />
+                <p>{artistName}</p>
                 <p>{artistId}</p>
                 <p>{collectionId}</p>
-                <p>{collectionName}</p>
                 <p>{collectionPrice}</p>
                 <p>{releaseDate}</p>
                 <p>{trackCount}</p>
-                <p>{artistName}</p>
               </Link>
             </div>
           ))}
