@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import Loading from './Loading';
-import { addSong } from '../services/favoriteSongsAPI';
+import { addSong, getFavoriteSongs } from '../services/favoriteSongsAPI';
 
 class MusicCard extends React.Component {
   constructor() {
@@ -12,12 +12,26 @@ class MusicCard extends React.Component {
     });
   }
 
+  componentDidMount() {
+    this.recoveryLocalFavoriteSongs();
+  }
+
   onInputChange = async ({ target }) => {
     const { name } = target;
     this.setState({
       loading: true,
     });
     await addSong(name);
+    this.setState({
+      loading: false,
+    });
+  };
+
+  recoveryLocalFavoriteSongs = async () => {
+    this.setState({
+      loading: true,
+    });
+    await getFavoriteSongs();
     this.setState({
       loading: false,
     });
