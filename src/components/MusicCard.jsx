@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import Loading from './Loading';
-import { addSong, getFavoriteSongs } from '../services/favoriteSongsAPI';
+import { addSong, getFavoriteSongs, removeSong } from '../services/favoriteSongsAPI';
 
 class MusicCard extends React.Component {
   constructor() {
@@ -17,30 +17,30 @@ class MusicCard extends React.Component {
   }
 
   onInputChange = async ({ target }) => {
-    const { name } = target;
-    this.setState({
-      loading: true,
-    });
-    await addSong(name);
-    this.setState({
-      loading: false,
-    });
+    const id = Number(target.id);
+    const { songs } = this.props;
+    const song = songs.find((item) => item.trackId === id);
+    this.setState({ loading: true });
+    // MECANISMO QUE INCLUI OU RETIRA O OBJETO DOS FAVORITOS
+    if (target.checked === true) {
+      await addSong(song);
+      this.setState({ loading: false });
+    } else {
+      await removeSong(song);
+      this.setState({ loading: false });
+    }
   };
 
   recoveryLocalFavoriteSongs = async () => {
-    this.setState({
-      loading: true,
-    });
+    this.setState({ loading: true });
     await getFavoriteSongs();
-    this.setState({
-      loading: false,
-    });
+    this.setState({ loading: false });
   };
 
   // FUNCAO QUE MANTEM CHECKED OS ITENS QUE ESTÃO NO LOCALSTORANGE(favoritos)
-  localCheck = (param) => {
-    const localSongs = localStorage.getItem('favorite_songs');
-    return localSongs.includes(param);
+  isChecked = (song) => {
+    const localCheck = localStorage.getItem('favorite_songs');
+    return localCheck.includes(song);
   };
 
   render() {
@@ -51,9 +51,9 @@ class MusicCard extends React.Component {
     newSongArray.shift();
     const divCard = (
       <div>
-        {newSongArray.map(({ trackName, previewUrl, trackId }, index) => (
+        {newSongArray.map((song, index) => (
           <div key={ index }>
-            <audio data-testid="audio-component" src={ previewUrl } controls>
+            <audio data-testid="audio-component" src={ song.previewUrl } controls>
               <track kind="captions" />
               O seu navegador não suporta o elemento
               {' '}
@@ -61,19 +61,19 @@ class MusicCard extends React.Component {
               <code>audio</code>
               .
             </audio>
-            <label htmlFor="favoriteInput">
+            <label htmlFor={ song.trackId }>
               Favorita
               <input
                 type="checkbox"
-                name={ trackName }
-                checked={ this.localCheck(trackName) }
-                id="favoriteInput"
+                name={ song.trackName }
+                checked={ this.isChecked(song.trackId) }
+                id={ song.trackId }
                 onChange={ this.onInputChange }
-                data-testid={ `checkbox-music-${trackId}` }
-                onClick={ this.handleClick }
+                data-testid={ `checkbox-music-${song.trackId}` }
+
               />
             </label>
-            <h3>{trackName}</h3>
+            <h3>{song.trackName}</h3>
           </div>
         ))}
       </div>

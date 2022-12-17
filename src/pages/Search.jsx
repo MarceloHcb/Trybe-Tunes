@@ -37,7 +37,6 @@ class Search extends React.Component {
   handleClick = async (e) => {
     e.preventDefault();
     const { searchName } = this.state;
-    console.log(e.target);
     this.setState({
       loading: true,
     });
