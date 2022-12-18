@@ -22,15 +22,6 @@ class Login extends React.Component {
 
   }
 
-  shouldComponentUpdate(_nextprops, nextState) {
-    console.log(nextState);
-    return true;
-  }
-
-  componentDidUpdate(prevProp, prevState) {
-    console.log(prevState);
-  }
-
   // VALIDACAO PARA HABILITAR O BOTAO
   validationButton = () => {
     const { name } = this.state;
@@ -42,18 +33,19 @@ class Login extends React.Component {
   };
 
   handleChange = ({ target }) => {
+    const { name, value } = target;
     this.setState({
-      name: target.value,
+      [name]: value,
     }, this.validationButton);
   };
 
   handleClick = async () => {
-    const { name } = this.state;
+    const { name, email, image, description } = this.state;
     this.setState({
       authenticated: true,
       loading: true,
     });
-    await createUser({ name });
+    await createUser({ name, email, image, description });
     this.setState({
       loading: false,
     });
@@ -68,7 +60,35 @@ class Login extends React.Component {
           <input
             type="text"
             id="inputName"
+            name="name"
             data-testid="login-name-input"
+            onChange={ this.handleChange }
+          />
+        </label>
+        <label htmlFor="inputEmail">
+          Email:
+          <input
+            type="email"
+            id="inputEmail"
+            name="email"
+            onChange={ this.handleChange }
+          />
+        </label>
+        <label htmlFor="inputDescription">
+          Descrição:
+          <textarea
+            type="text"
+            id="inputDescription"
+            name="description"
+            onChange={ this.handleChange }
+          />
+        </label>
+        <label htmlFor="inputImage">
+          Imagem do Perfil:
+          <input
+            type="text"
+            id="inputImage"
+            name="image"
             onChange={ this.handleChange }
           />
         </label>

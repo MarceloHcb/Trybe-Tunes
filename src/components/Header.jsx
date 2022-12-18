@@ -22,7 +22,6 @@ class Header extends React.Component {
       loading: true,
     });
     const data = await getUser();
-    console.log(data);
     this.setState({
       userInfo: { ...data },
       loading: false,

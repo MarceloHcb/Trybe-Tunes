@@ -4,11 +4,11 @@ import Loading from './Loading';
 import { addSong, getFavoriteSongs, removeSong } from '../services/favoriteSongsAPI';
 
 class MusicCard extends React.Component {
-  constructor() {
-    super();
-
+  constructor(props) {
+    super(props);
     this.state = ({
       loading: false,
+      favSongs: [],
     });
   }
 
@@ -29,12 +29,16 @@ class MusicCard extends React.Component {
       await removeSong(song);
       this.setState({ loading: false });
     }
+    this.recoveryLocalFavoriteSongs();
   };
 
   recoveryLocalFavoriteSongs = async () => {
     this.setState({ loading: true });
-    await getFavoriteSongs();
-    this.setState({ loading: false });
+    const local = await getFavoriteSongs();
+    this.setState({
+      loading: false,
+      favSongs: local,
+    });
   };
 
   // FUNCAO QUE MANTEM CHECKED OS ITENS QUE ESTÃO NO LOCALSTORANGE(favoritos)
@@ -44,14 +48,15 @@ class MusicCard extends React.Component {
   };
 
   render() {
-    const { loading } = this.state;
-    const { songs } = this.props;
+    const { loading, favSongs } = this.state;
+    const { fav, songs } = this.props;
     // RETIRA O PRIMEIRO INDICE DO ARRAY SONGS
     const newSongArray = [...songs];
     newSongArray.shift();
+    const musicArray = fav === 'favorites' ? favSongs : newSongArray;
     const divCard = (
       <div>
-        {newSongArray.map((song, index) => (
+        {musicArray.map((song, index) => (
           <div key={ index }>
             <audio data-testid="audio-component" src={ song.previewUrl } controls>
               <track kind="captions" />
@@ -87,6 +92,7 @@ class MusicCard extends React.Component {
   }
 }
 MusicCard.propTypes = {
+  fav: PropTypes.string.isRequired,
   songs: PropTypes.arrayOf(
     PropTypes.object.isRequired,
   ).isRequired,

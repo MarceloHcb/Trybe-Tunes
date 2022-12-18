@@ -42,7 +42,7 @@ class Album extends React.Component {
           {album.artistName}
         </h2>
         <h2 data-testid="album-name">{album.collectionName}</h2>
-        <MusicCard songs={ songs } />
+        <MusicCard songs={ songs } fav="noFavorites" />
       </div>
     );
     return (
