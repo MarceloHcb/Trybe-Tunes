@@ -1,0 +1,28 @@
+.loading {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  left: 20px;
+  position: absolute;
+  top: 50%;
+  width: 95%;
+}
+
+h1 {
+  font-size: 48.92px;
+  font-weight: 400;
+  line-height: 50px;
+  text-align: center;
+}
+
+.img {
+  animation: spin 4s linear infinite;
+}
+
+@keyframes spin {
+
+  100% {
+    transform: rotate(360deg);
+  }
+}

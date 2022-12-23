@@ -1,0 +1,50 @@
+.container {
+  align-items: center;
+  background-color: white;
+  color: #444955;
+  display: flex;
+  flex-direction: column;
+  font-size: 16px;
+  font-weight: 400;
+  height: 100vh;
+  justify-content: space-evenly;
+  letter-spacing: 0.03em;
+  line-height: 16px;
+  text-transform: capitalize;
+  width: 250px;
+}
+
+h1 {
+  font-size: 30px;
+}
+
+.logo {
+  height: 95.71px;
+  width: 170.81px;
+}
+
+.userDiv {
+  align-items: center;
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+}
+
+.userImg {
+  border-radius: 50%;
+  height: 40px;
+  width: 40px;
+}
+
+.Link {
+  align-items: center;
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+}
+
+.icon {
+  color: #c0c3c9;
+  height: 23px;
+  width: 23px;
+}

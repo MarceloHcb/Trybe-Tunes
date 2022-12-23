@@ -1,0 +1,50 @@
+.container {
+  align-items: center;
+  background: #eff3f9;
+  display: flex;
+  justify-content: space-between;
+  position: absolute;
+  width: 100%;
+  z-index: 1;
+}
+
+.container form {
+  align-items: center;
+  color: #3d495c;
+  display: flex;
+  flex-direction: column;
+  font-size: 16px;
+  font-weight: 700;
+  gap: 20px;
+  justify-content: center;
+  left: 50%;
+  line-height: 150%;
+  position: absolute;
+  top: 50%;
+}
+
+.container label {
+  display: flex;
+  flex-direction: column;
+}
+
+.container input::placeholder {
+  color: grey;
+  text-align: center;
+}
+
+.userImg {
+  border-radius: 50%;
+  filter: drop-shadow(-9px 8px 8px rgba(0, 0, 0, 0.2));
+  height: 240px;
+  left: 20%;
+  position: absolute;
+  top: 23%;
+  width: 240px;
+}
+
+.imageLabel {
+  left: -120%;
+  position: absolute;
+  top: 20%;
+}

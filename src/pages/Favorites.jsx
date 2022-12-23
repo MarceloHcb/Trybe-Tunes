@@ -3,6 +3,8 @@ import Header from '../components/Header';
 import { getFavoriteSongs } from '../services/favoriteSongsAPI';
 import Loading from '../components/Loading';
 import MusicCard from '../components/MusicCard';
+import HeaderBackground from '../components/HeaderBackground';
+import style from './Favorites.module.css';
 
 class Favorites extends React.Component {
   constructor() {
@@ -29,12 +31,20 @@ class Favorites extends React.Component {
 
   render() {
     const { loading, songs } = this.state;
-    console.log(songs);
+    const divFavorites = (
+      <div className={ style.favorites }>
+        <MusicCard songs={ songs } fav="favorites" />
+      </div>
+    );
     return (
-      <div data-testid="page-favorites">
+      <div data-testid="page-favorites" className={ style.container }>
         <Header />
-        {loading ? <Loading /> : <MusicCard songs={ songs } fav="favorites" />}
-
+        <HeaderBackground />
+        <h2 className={ style.title }> Músicas Favoritas</h2>
+        <div className={ style.favorites }>
+          {loading ? <Loading />
+            : divFavorites}
+        </div>
       </div>
     );
   }

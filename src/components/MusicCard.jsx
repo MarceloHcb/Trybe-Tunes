@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import Loading from './Loading';
 import { addSong, getFavoriteSongs, removeSong } from '../services/favoriteSongsAPI';
+import style from './MusicCard.module.css';
 
 class MusicCard extends React.Component {
   constructor(props) {
@@ -22,7 +23,7 @@ class MusicCard extends React.Component {
     const song = songs.find((item) => item.trackId === id);
     this.setState({ loading: true });
     // MECANISMO QUE INCLUI OU RETIRA O OBJETO DOS FAVORITOS
-    if (target.checked === true) {
+    if (target.checked) {
       await addSong(song);
       this.setState({ loading: false });
     } else {
@@ -49,15 +50,21 @@ class MusicCard extends React.Component {
 
   render() {
     const { loading, favSongs } = this.state;
-    const { fav, songs } = this.props;
+    const { fav, songs, collectionImage } = this.props;
     // RETIRA O PRIMEIRO INDICE DO ARRAY SONGS
     const newSongArray = [...songs];
     newSongArray.shift();
     const musicArray = fav === 'favorites' ? favSongs : newSongArray;
+    const albumImage = fav !== 'favorites' ? (<img
+      src={ collectionImage }
+      alt="collectionImage"
+    />) : '';
     const divCard = (
-      <div>
+      <div className={ style.container }>
+        { albumImage }
         {musicArray.map((song, index) => (
-          <div key={ index }>
+          <div key={ index } className={ style.list }>
+            <h3>{song.trackName}</h3>
             <audio data-testid="audio-component" src={ song.previewUrl } controls>
               <track kind="captions" />
               O seu navegador não suporta o elemento
@@ -67,7 +74,6 @@ class MusicCard extends React.Component {
               .
             </audio>
             <label htmlFor={ song.trackId }>
-              Favorita
               <input
                 type="checkbox"
                 name={ song.trackName }
@@ -75,10 +81,11 @@ class MusicCard extends React.Component {
                 id={ song.trackId }
                 onChange={ this.onInputChange }
                 data-testid={ `checkbox-music-${song.trackId}` }
-
+                className={ style.inputCheckbox }
               />
+              <p>Favorita</p>
+              <span />
             </label>
-            <h3>{song.trackName}</h3>
           </div>
         ))}
       </div>
@@ -93,6 +100,7 @@ class MusicCard extends React.Component {
 }
 MusicCard.propTypes = {
   fav: PropTypes.string.isRequired,
+  collectionImage: PropTypes.string.isRequired,
   songs: PropTypes.arrayOf(
     PropTypes.object.isRequired,
   ).isRequired,

@@ -1,0 +1,105 @@
+.container {
+  background: #eff3f9;
+  display: flex;
+  justify-content: center;
+  text-align: center;
+}
+
+.form {
+  align-items: center;
+  display: flex;
+  height: 320px;
+  justify-content: center;
+  left: 14%;
+  position: absolute;
+  top: 0;
+  width: 86%;
+  z-index: 3;
+}
+
+.artistDiv {
+  align-items: center;
+  background: #eff3f9;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-top: 360px;
+  width: 100%;
+}
+
+h2 {
+  font-size: 20px;
+  font-style: italic;
+  font-weight: 300;
+  line-height: 20px;
+  text-align: center;
+}
+
+.btn {
+  align-items: center;
+  background: #003be5;
+  border-radius: 100px;
+  color: white;
+  cursor: pointer;
+  display: flex;
+  font-family: Epilogue , sans-serif;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 700;
+  height: 100%;
+  justify-content: center;
+  letter-spacing: 0.03em;
+  line-height: 14px;
+  margin-left: 10px;
+  padding: 13px;
+  text-align: center;
+  text-transform: uppercase;
+  width: 150px;
+}
+
+.input {
+  background-color: rgba(255, 255, 255, 0.5);
+  border: none;
+  border-radius: 20px;
+  cursor: pointer;
+  padding: 20px;
+  position: relative;
+  text-transform: uppercase;
+}
+
+label {
+  align-items: center;
+  display: flex;
+  justify-content: center;
+  position: relative;
+}
+
+.iconSearch {
+  color: white;
+  cursor: pointer;
+  left: -30px;
+  position: absolute;
+}
+
+input::placeholder {
+  color: white;
+  font-family: Epilogue , sans-serif;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  letter-spacing: 0.03em;
+  line-height: 14px;
+}
+
+.error {
+  color: #c0c3c9;
+  font-size: 30px;
+  font-weight: 400;
+  line-height: 31px;
+  text-align: center;
+}
+
+.error img {
+  height: 69.04px;
+  width: 69.04px;
+}

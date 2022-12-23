@@ -1,8 +1,12 @@
 import React from 'react';
+import { BsSearch } from 'react-icons/bs';
 import Header from '../components/Header';
 import Loading from '../components/Loading';
 import searchAlbumsAPI from '../services/searchAlbumsAPI';
 import ArtisticCard from '../components/ArtisticCard';
+import style from './Search.module.css';
+import errorLogo from '../images/🦆 icon _circle error_.png';
+import HeaderBackground from '../components/HeaderBackground';
 
 // CAMPO DE PESQUISA
 class Search extends React.Component {
@@ -42,10 +46,16 @@ class Search extends React.Component {
     });
     // REQUISIÇÃO DE ARTISTAS COM BASE NO NOME DIGITADO NA PESQUISA
     const artisticResult = await searchAlbumsAPI(searchName);
+    const divError = (
+      <div className={ style.error }>
+        <img src={ errorLogo } alt="erro" />
+        <h2> Nenhum álbum foi encontrado</h2>
+      </div>
+    );
     this.setState({
       loading: false,
       artisticSearchResult: [...artisticResult],
-      error: 'Nenhum álbum foi encontrado',
+      error: divError,
     });
   };
 
@@ -53,38 +63,47 @@ class Search extends React.Component {
     const { buttonDisable, loading, searchName,
       artisticSearchResult, error } = this.state;
     const artisticSearchResultDiv = (
-      <h2>
-        Resultado de álbuns de:
-        {' '}
-        {searchName}
+      <div>
+        <h1>
+          Resultado de álbuns de:
+          {' '}
+          {searchName}
+        </h1>
         <ArtisticCard artisticSearchResult={ artisticSearchResult } />
-      </h2>
+      </div>
     );
     const form = (
-      <form>
+      <form className={ style.form }>
+        <HeaderBackground />
         <input
           type="text"
+          placeholder="nome do artista"
           data-testid="search-artist-input"
           onChange={ this.handleChange }
+          className={ style.input }
         />
-        <button
-          type="submit"
-          disabled={ buttonDisable }
-          onClick={ this.handleClick }
-          data-testid="search-artist-button"
-        >
-          Pesquisar
+        <label htmlFor="inputSearch">
+          <input
+            type="submit"
+            id="inputSearch"
+            value="Pesquisar"
+            disabled={ buttonDisable }
+            onClick={ this.handleClick }
+            data-testid="search-artist-button"
+            className={ style.btn }
+          />
 
-        </button>
+          <BsSearch className={ style.iconSearch } />
+        </label>
       </form>);
     return (
-      <div data-testid="page-search">
+      <div data-testid="page-search" className={ style.container }>
         <Header />
         { loading ? <Loading />
           : form}
-        <div>
+        <div className={ style.artistDiv }>
           { artisticSearchResult.length > 0
-            ? artisticSearchResultDiv : error }
+            ? artisticSearchResultDiv : error}
 
         </div>
       </div>

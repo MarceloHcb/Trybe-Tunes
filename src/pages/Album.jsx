@@ -4,6 +4,8 @@ import Header from '../components/Header';
 import MusicCard from '../components/MusicCard';
 import getMusics from '../services/musicsAPI';
 import Loading from '../components/Loading';
+import style from './Album.module.css';
+import HeaderBackground from '../components/HeaderBackground';
 
 class Album extends React.Component {
   constructor() {
@@ -37,20 +39,27 @@ class Album extends React.Component {
   render() {
     const { songs, album, loading } = this.state;
     const divCard = (
-      <div data-testid="page-album">
-        <h2 data-testid="artist-name">
-          {album.artistName}
-        </h2>
+      <div>
         <h2 data-testid="album-name">{album.collectionName}</h2>
-        <MusicCard songs={ songs } fav="noFavorites" />
+        <p data-testid="artist-name">
+          {album.artistName}
+        </p>
+        <MusicCard
+          songs={ songs }
+          fav="noFavorites"
+          collectionImage={ album.artworkUrl100 }
+        />
       </div>
+
     );
     return (
-      <div>
+      <div className={ style.container }>
+        <HeaderBackground />
         <Header />
-        { loading ? <Loading />
-          : divCard}
-
+        <div data-testid="page-album" className={ style.divCard }>
+          { loading ? <Loading />
+            : divCard}
+        </div>
       </div>
     );
   }

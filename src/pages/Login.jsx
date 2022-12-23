@@ -2,15 +2,20 @@ import React from 'react';
 import { Redirect } from 'react-router-dom';
 import { createUser } from '../services/userAPI';
 import Loading from '../components/Loading';
+import style from './Login.module.css';
+import logo from '../images/logo.png';
 
 class Login extends React.Component {
   constructor(props) {
     super(props);
     const INITIAL_STATE = {
-      name: '',
       login: true,
       authenticated: false,
       loading: false,
+      isSaveButtonDisabled: true,
+      name: '',
+      email: '',
+      image: '',
     };
 
     this.state = ({
@@ -18,17 +23,18 @@ class Login extends React.Component {
     });
   }
 
-  componentDidMount() {
-
-  }
-
   // VALIDACAO PARA HABILITAR O BOTAO
   validationButton = () => {
     const { name } = this.state;
+
     const maxCaracteres = 3;
-    const validationName = name.length >= maxCaracteres;
+    const validation = name.length >= maxCaracteres;
+    // const validation1 = email.length > 0;
+    // const validation2 = email.includes('@')
+    // && (email.includes('.com') || email.includes('.COM'));
+    // const validation3 = password.length >= 6;
     this.setState({
-      login: !validationName,
+      isSaveButtonDisabled: !(validation),
     });
   };
 
@@ -52,9 +58,10 @@ class Login extends React.Component {
   };
 
   render() {
-    const { authenticated, login, loading } = this.state;
+    const { authenticated, isSaveButtonDisabled, loading } = this.state;
     const form = (
-      <form>
+      <form className={ style.form }>
+        <img src={ logo } alt="logo" />
         <label htmlFor="inputName">
           Name:
           <input
@@ -62,6 +69,7 @@ class Login extends React.Component {
             id="inputName"
             name="name"
             data-testid="login-name-input"
+            placeholder="qual é o seu nome? "
             onChange={ this.handleChange }
           />
         </label>
@@ -71,6 +79,7 @@ class Login extends React.Component {
             type="email"
             id="inputEmail"
             name="email"
+            placeholder="qual seu e-mail? "
             onChange={ this.handleChange }
           />
         </label>
@@ -81,10 +90,12 @@ class Login extends React.Component {
             id="inputDescription"
             name="description"
             onChange={ this.handleChange }
+            rows="2"
+            cols="42"
           />
         </label>
         <label htmlFor="inputImage">
-          Imagem do Perfil:
+          Imagem:
           <input
             type="text"
             id="inputImage"
@@ -94,7 +105,7 @@ class Login extends React.Component {
         </label>
         <button
           type="submit"
-          disabled={ login }
+          disabled={ isSaveButtonDisabled }
           onClick={ this.handleClick }
           data-testid="login-submit-button"
         >
@@ -103,7 +114,7 @@ class Login extends React.Component {
         </button>
       </form>);
     return (
-      <div data-testid="page-login">
+      <div data-testid="page-login" className={ style.container }>
         {!loading ? form : <Loading /> }
       </div>
     );
