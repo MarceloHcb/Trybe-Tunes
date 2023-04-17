@@ -1,16 +1,16 @@
 {
   "files": {
-    "main.css": "/Trybe-Tunes/static/css/main.1ef108d2.css",
-    "main.js": "/Trybe-Tunes/static/js/main.1d31b9eb.js",
-    "static/media/loading.svg": "/Trybe-Tunes/static/media/loading.ad857a3d0ab2441d0ce1912374b1dc10.svg",
-    "static/media/heart.svg": "/Trybe-Tunes/static/media/heart.4dfc36798d4eb0836b53.svg",
-    "static/media/whiteheart.svg": "/Trybe-Tunes/static/media/whiteheart.4608f6b62637c87a9ac0.svg",
-    "index.html": "/Trybe-Tunes/index.html",
-    "main.1ef108d2.css.map": "/Trybe-Tunes/static/css/main.1ef108d2.css.map",
-    "main.1d31b9eb.js.map": "/Trybe-Tunes/static/js/main.1d31b9eb.js.map"
+    "main.css": "/Trybe-Tunes/login/static/css/main.f7a587cf.css",
+    "main.js": "/Trybe-Tunes/login/static/js/main.b14a8275.js",
+    "static/media/loading.svg": "/Trybe-Tunes/login/static/media/loading.ad857a3d0ab2441d0ce1912374b1dc10.svg",
+    "static/media/heart.svg": "/Trybe-Tunes/login/static/media/heart.4dfc36798d4eb0836b53.svg",
+    "static/media/whiteheart.svg": "/Trybe-Tunes/login/static/media/whiteheart.4608f6b62637c87a9ac0.svg",
+    "index.html": "/Trybe-Tunes/login/index.html",
+    "main.f7a587cf.css.map": "/Trybe-Tunes/login/static/css/main.f7a587cf.css.map",
+    "main.b14a8275.js.map": "/Trybe-Tunes/login/static/js/main.b14a8275.js.map"
   },
   "entrypoints": [
-    "static/css/main.1ef108d2.css",
-    "static/js/main.1d31b9eb.js"
+    "static/css/main.f7a587cf.css",
+    "static/js/main.b14a8275.js"
   ]
 }
