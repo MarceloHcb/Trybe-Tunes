@@ -38,9 +38,15 @@ input {
   text-transform: uppercase;
   width: 400px;
 }
-
+.inputName {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  
+}
 input::placeholder {
-  color: #003be5;
+  color: #003be5;  
 }
 
 textarea {

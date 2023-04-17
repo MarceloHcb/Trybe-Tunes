@@ -118,7 +118,7 @@ class ProfileEdit extends React.Component {
           />
         </label>
         <label htmlFor="inputImage" className={ style.imageLabel }>
-          Insira um link
+          Insira um link para imagem
           <input
             placeholder={ image }
             type="text"

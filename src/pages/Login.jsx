@@ -62,8 +62,8 @@ class Login extends React.Component {
     const form = (
       <form className={ style.form }>
         <img src={ logo } alt="logo" />
-        <label htmlFor="inputName">
-          Name:
+        <div className={ style.inputName }>
+          Nome
           <input
             type="text"
             id="inputName"
@@ -72,7 +72,9 @@ class Login extends React.Component {
             placeholder="qual é o seu nome? "
             onChange={ this.handleChange }
           />
-        </label>
+        </div>
+
+        {/*
         <label htmlFor="inputEmail">
           Email:
           <input
@@ -102,7 +104,7 @@ class Login extends React.Component {
             name="image"
             onChange={ this.handleChange }
           />
-        </label>
+        </label> */}
         <button
           type="submit"
           disabled={ isSaveButtonDisabled }
